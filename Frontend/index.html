@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bucketlist Staycations</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- MOBILE HEADER -->
+  <header class="mobile-header">
+    <div class="mobile-logo">
+      <img src="favicon.jpg" alt="Logo" class="mobile-logo-img" />
+      <span class="mobile-logo-text">Bucketlist <em>Staycations</em></span>
+    </div>
+    <button class="hamburger" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleMobileMenu()"></div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <button class="sidebar-close" onclick="toggleMobileMenu()">✕</button>
+    <div class="logo">
+      <img src="favicon.jpg" alt="Bucketlist Staycations" class="logo-img" />
+      <span class="logo-text">Bucketlist<br><em>Staycations</em></span>
+    </div>
+
+    <nav class="nav-links">
+      <a href="javascript:void(0)" class="nav-link active" onclick="showPage('listings', this)"><span class="nav-icon">⊞</span> Listings</a>
+      <a href="javascript:void(0)" class="nav-link" onclick="showPage('about', this)"><span class="nav-icon">◎</span> About</a>
+      <a href="javascript:void(0)" class="nav-link" id="bookingsNav" style="display:none" onclick="showPage('bookings', this)"><span class="nav-icon">📋</span> My Bookings</a>
+      <a href="javascript:void(0)" class="nav-link" onclick="showPage('corporate', this)"><span class="nav-icon">🏢</span> Corporate Staycations</a>
+      <a href="javascript:void(0)" class="nav-link" onclick="showPage('contact', this)"><span class="nav-icon">✉</span> Contact</a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <!-- Login button (shown when logged out) -->
+      <button class="btn-login-sidebar" id="loginBtn" onclick="openAuthModal('login')">
+        👤 Login / Register
+      </button>
+      <!-- User menu (shown when logged in) -->
+      <div class="user-menu" id="userMenu" style="display:none">
+        <span class="user-greeting">👋 Hi, <span id="userName"></span></span>
+        <button class="btn-logout" onclick="logout()">Logout</button>
+      </div>
+      <button class="theme-toggle" onclick="toggleTheme()">
+        <span id="themeIcon">🌙</span>
+        <span id="themeLabel">Dark Mode</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <!-- LISTINGS -->
+    <section id="page-listings" class="page active">
+      <div class="page-header">
+        <h1 class="page-title">Our <em>Properties</em></h1>
+        <p class="page-subtitle">Handpicked stays across Kenya's finest locations</p>
+      </div>
+      <div class="listings-grid" id="listingsGrid"></div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="page-about" class="page">
+      <div class="page-header">
+        <h1 class="page-title">About <em>Us</em></h1>
+        <p class="page-subtitle">Your trusted home away from home</p>
+      </div>
+      <div class="about-content">
+        <div class="about-hero">
+          <img src="images/IMG_0039.jpg" alt="Tatu City" class="about-hero-img" />
+          <div class="about-hero-text">
+            <h2>Welcome to Bucketlist Staycations</h2>
+            <p>We curate premium short-stay apartments across Kenya's most sought-after locations. Whether you're visiting for business, a family holiday, or a romantic getaway — we have a home that fits.</p>
+            <p>Our properties are fully furnished, professionally managed, and designed to give you the comfort of home with the luxury of a hotel.</p>
+          </div>
+        </div>
+        <div class="about-properties">
+          <h2>Our Properties</h2>
+          <div class="about-property-card">
+            <div class="about-prop-header"><h3>🏙️ Tatu City Airbnb</h3><span class="about-location-badge">Tatu City, Nairobi</span></div>
+            <p>Stunning 3-bedroom apartment with football pitch, swimming pool, basketball court, gym and mini mart.</p>
+            <div class="about-amenities-grid">
+              <div class="about-amenity"><span>🛏</span> 3 Bedrooms</div><div class="about-amenity"><span>🚿</span> 2.5 Bathrooms</div>
+              <div class="about-amenity"><span>👑</span> Master En-Suite</div><div class="about-amenity"><span>⚽</span> Football Pitch</div>
+              <div class="about-amenity"><span>🏊</span> Swimming Pool</div><div class="about-amenity"><span>🏀</span> Basketball Court</div>
+              <div class="about-amenity"><span>🏋️</span> Gym</div><div class="about-amenity"><span>🏪</span> Mini Mart</div>
+            </div>
+          </div>
+          <div class="about-property-card" style="margin-top:1.5rem">
+            <div class="about-prop-header"><h3>🌆 Riverside Winchester Gardens</h3><span class="about-location-badge">Riverside, Nairobi</span></div>
+            <p>Luxurious 2-bedroom on the 15th floor with breathtaking Nairobi skyline views, private balcony and free parking.</p>
+            <div class="about-amenities-grid">
+              <div class="about-amenity"><span>🛏</span> 2 Bedrooms</div><div class="about-amenity"><span>🚿</span> 2 Bathrooms</div>
+              <div class="about-amenity"><span>🏙️</span> 15th Floor</div><div class="about-amenity"><span>🛁</span> Balcony</div>
+              <div class="about-amenity"><span>🅿️</span> Free Parking</div><div class="about-amenity"><span>🏊</span> Pool</div>
+              <div class="about-amenity"><span>🛗</span> Elevator</div><div class="about-amenity"><span>📍</span> Near Malls</div>
+            </div>
+          </div>
+          <div class="about-property-card" style="margin-top:1.5rem">
+            <div class="about-prop-header"><h3>🏡 Racecourse Gardens</h3><span class="about-location-badge">Racecourse, Nairobi</span></div>
+            <p>Cosy 1-bedroom with gym, pool and laundromat. Close to Junction Mall — perfect for solo travellers or couples.</p>
+            <div class="about-amenities-grid">
+              <div class="about-amenity"><span>🛏</span> 1 Bedroom</div><div class="about-amenity"><span>🚿</span> 1 Bathroom</div>
+              <div class="about-amenity"><span>🏋️</span> Gym</div><div class="about-amenity"><span>🏊</span> Pool</div>
+              <div class="about-amenity"><span>👕</span> Laundromat</div><div class="about-amenity"><span>🍽️</span> Restaurant</div>
+              <div class="about-amenity"><span>🛍️</span> Near Junction</div><div class="about-amenity"><span>🅿️</span> Parking</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MY BOOKINGS -->
+    <section id="page-bookings" class="page">
+      <div class="page-header">
+        <h1 class="page-title">My <em>Bookings</em></h1>
+        <p class="page-subtitle">Your stays — past, present and upcoming</p>
+      </div>
+      <div id="bookingsList"></div>
+    </section>
+
+    <!-- CORPORATE -->
+    <section id="page-corporate" class="page">
+      <div class="page-header">
+        <h1 class="page-title">Corporate <em>Staycations</em></h1>
+        <p class="page-subtitle">A subsidiary of Bucketlist Staycations — built for businesses</p>
+      </div>
+      <div class="corporate-content">
+        <div class="corporate-hero">
+          <div class="corporate-hero-text">
+            <div class="corporate-badge">🏢 For Companies & HR Teams</div>
+            <h2>Take the Booking Load Off Your HR Team</h2>
+            <p>We handle end-to-end accommodation for your corporate travel — from holiday retreats to work-trip stays. Your HR team books once, we manage everything else.</p>
+            <button class="btn-corporate-cta" onclick="showPage('contact', document.querySelector('.nav-link:nth-child(5)'))">Get in Touch →</button>
+          </div>
+          <div class="corporate-hero-visual">
+            <div class="corporate-stat"><span class="stat-number">100%</span><span class="stat-label">Managed stays</span></div>
+            <div class="corporate-stat"><span class="stat-number">0</span><span class="stat-label">HR headaches</span></div>
+            <div class="corporate-stat"><span class="stat-number">24/7</span><span class="stat-label">Support</span></div>
+          </div>
+        </div>
+        <div class="corporate-section">
+          <h2>How It Works</h2>
+          <div class="steps-grid">
+            <div class="step-card"><div class="step-number">01</div><h3>Company Reaches Out</h3><p>HR contacts us with travel requirements — dates, number of employees, location and budget.</p></div>
+            <div class="step-card"><div class="step-number">02</div><h3>We Curate Options</h3><p>We match your team with the best available properties and send a tailored proposal within 24 hours.</p></div>
+            <div class="step-card"><div class="step-number">03</div><h3>One Invoice, Done</h3><p>HR approves and pays. We handle all logistics, check-ins and support from there.</p></div>
+          </div>
+        </div>
+        <div class="corporate-section">
+          <h2>What We Offer</h2>
+          <div class="corporate-offers-grid">
+            <div class="offer-card"><div class="offer-icon">✈️</div><h3>Work Trip Accommodation</h3><p>Comfortable stays for employees on assignment, training, or client visits.</p></div>
+            <div class="offer-card"><div class="offer-icon">🌴</div><h3>Team Holiday Retreats</h3><p>End-of-year trips and team-building getaways managed start to finish.</p></div>
+            <div class="offer-card"><div class="offer-icon">📋</div><h3>Bulk Booking Management</h3><p>Book for multiple employees at once. One point of contact for everything.</p></div>
+            <div class="offer-card"><div class="offer-icon">💼</div><h3>Executive Stays</h3><p>Premium properties for C-suite visits, board members or VIP guests.</p></div>
+            <div class="offer-card"><div class="offer-icon">🧾</div><h3>Corporate Invoicing</h3><p>Clean invoices compatible with company accounting. VAT receipts available.</p></div>
+            <div class="offer-card"><div class="offer-icon">📞</div><h3>Dedicated Account Manager</h3><p>Every corporate client gets a dedicated contact — no call centres, no bots.</p></div>
+          </div>
+        </div>
+        <div class="corporate-cta-banner">
+          <h2>Ready to simplify your company's travel?</h2>
+          <p>Get in touch and we'll put together a tailored corporate package for your team.</p>
+          <div class="cta-buttons">
+            <a href="mailto:bucketliststaycations@gmail.com?subject=Corporate Staycations Enquiry" class="btn-cta-email">✉ Email Us</a>
+            <a href="https://wa.me/254716564174?text=Hi, I'd like to enquire about Corporate Staycations." target="_blank" class="btn-cta-whatsapp">💬 WhatsApp Us</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="page-contact" class="page">
+      <div class="page-header">
+        <h1 class="page-title">Get in <em>Touch</em></h1>
+        <p class="page-subtitle">We'd love to hear from you</p>
+      </div>
+      <div class="contact-layout">
+        <div class="contact-info">
+          <div class="contact-card">
+            <div class="contact-icon">✉</div>
+            <h3>Email Us</h3>
+            <p>bucketliststaycations@gmail.com</p>
+            <a href="mailto:bucketliststaycations@gmail.com" class="contact-btn">Send Email</a>
+          </div>
+          <div class="contact-card">
+            <div class="contact-icon">📱</div>
+            <h3>WhatsApp / Call</h3>
+            <p>+254 716 564 174</p>
+            <a href="https://wa.me/254716564174" target="_blank" class="contact-btn">WhatsApp Us</a>
+          </div>
+        </div>
+        <div class="contact-form-wrap">
+          <h3>Send a Message</h3>
+          <form class="contact-form" action="https://formspree.io/f/xbdqnbgl" method="POST">
+            <div class="form-group"><label>Your Name</label><input type="text" name="name" placeholder="John Doe" required /></div>
+            <div class="form-group"><label>Your Email</label><input type="email" name="email" placeholder="john@example.com" required /></div>
+            <div class="form-group"><label>Your Phone (optional)</label><input type="tel" name="phone" placeholder="07XX XXX XXX" /></div>
+            <div class="form-group">
+              <label>Enquiry Type</label>
+              <select name="enquiry_type">
+                <option value="general">General Enquiry</option>
+                <option value="booking">Property Booking</option>
+                <option value="corporate">Corporate Staycations</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Message</label><textarea name="message" rows="5" placeholder="Tell us what you need..." required></textarea></div>
+            <button type="submit" class="btn-submit">Send Message ✉</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <p>© 2026 Bucketlist Staycations. All rights reserved.</p>
+      <p class="footer-sub">A <span>Corporate Staycations</span> partner</p>
+    </footer>
+  </main>
+
+  <!-- AUTH MODAL -->
+  <div class="modal-overlay" id="authModal" onclick="if(event.target===this)closeAuthModal()">
+    <div class="auth-modal">
+      <button class="modal-close" onclick="closeAuthModal()">✕</button>
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tabLogin" onclick="switchAuthTab('login')">Login</button>
+        <button class="auth-tab" id="tabRegister" onclick="switchAuthTab('register')">Register</button>
+      </div>
+      <p class="auth-error" id="authError"></p>
+
+      <!-- Login Form -->
+      <form id="loginForm" onsubmit="submitLogin(event)">
+        <div class="form-group"><label>Email</label><input type="email" id="loginEmail" placeholder="john@example.com" required /></div>
+        <div class="form-group"><label>Password</label><input type="password" id="loginPassword" placeholder="••••••••" required /></div>
+        <button type="submit" class="btn-submit" id="loginSubmitBtn" style="width:100%">Login</button>
+        <p class="auth-switch">
+          <a href="javascript:void(0)" onclick="showForgotPassword()" style="color:#7a9b35">Forgot password?</a>
+        </p>
+        <p class="auth-switch">Don't have an account? <a href="javascript:void(0)" onclick="switchAuthTab('register')">Register here</a></p>
+      </form>
+
+      <!-- Register Form -->
+      <form id="registerForm" style="display:none" onsubmit="submitRegister(event)">
+        <div class="form-group"><label>Full Name</label><input type="text" id="registerName" placeholder="John Doe" required /></div>
+        <div class="form-group"><label>Email</label><input type="email" id="registerEmail" placeholder="john@example.com" required /></div>
+        <div class="form-group"><label>Phone (optional)</label><input type="tel" id="registerPhone" placeholder="07XX XXX XXX" /></div>
+        <div class="form-group"><label>Password</label><input type="password" id="registerPassword" placeholder="Min 6 characters" required /></div>
+        <button type="submit" class="btn-submit" id="registerSubmitBtn" style="width:100%">Create Account</button>
+        <p class="auth-switch">Already have an account? <a href="javascript:void(0)" onclick="switchAuthTab('login')">Login here</a></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- FORGOT PASSWORD MODAL -->
+  <div class="modal-overlay" id="forgotModal" onclick="if(event.target===this)closeForgotModal()">
+    <div class="auth-modal">
+      <button class="modal-close" onclick="closeForgotModal()">✕</button>
+      <h2 class="booking-title">Reset Password</h2>
+      <p style="color:var(--text-muted);font-size:0.9rem;margin:0.5rem 0 1rem">Enter your email and we'll send you a password reset link.</p>
+      <p class="auth-error" id="forgotError"></p>
+      <form id="forgotForm" onsubmit="submitForgotPassword(event)">
+        <div class="form-group"><label>Email</label><input type="email" id="forgotEmail" placeholder="john@example.com" required /></div>
+        <button type="submit" class="btn-submit" id="forgotSubmitBtn" style="width:100%">Send Reset Link</button>
+        <p class="auth-switch"><a href="javascript:void(0)" onclick="closeForgotModal();openAuthModal('login')">← Back to login</a></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- GALLERY MODAL -->
+  <div class="modal-overlay" id="galleryModal" onclick="closeGalleryOutside(event)">
+    <div class="gallery-modal">
+      <button class="modal-close" onclick="closeGallery()">✕</button>
+      <h2 class="gallery-title" id="galleryTitle">Gallery</h2>
+      <div class="gallery-main">
+        <button class="gallery-nav prev" onclick="prevPhoto()">‹</button>
+        <img src="" alt="" class="gallery-main-img" id="galleryMainImg" />
+        <button class="gallery-nav next" onclick="nextPhoto()">›</button>
+      </div>
+      <div class="gallery-thumbs" id="galleryThumbs"></div>
+    </div>
+  </div>
+
+  <!-- BOOKING MODAL -->
+  <div class="modal-overlay" id="bookingModal" onclick="closeBookingOutside(event)">
+    <div class="booking-modal">
+      <button class="modal-close" onclick="closeBooking()">✕</button>
+      <h2 class="booking-title">Book <em id="bookingPropertyName"></em></h2>
+      <div class="booking-steps">
+
+        <!-- Step 1: Dates -->
+        <div class="booking-step" id="step1">
+          <h3>📅 Select Your Dates</h3>
+          <div class="date-fields">
+            <div class="form-group"><label>Check-in</label><input type="date" id="checkIn" onchange="calculateTotal()" /></div>
+            <div class="form-group"><label>Check-out</label><input type="date" id="checkOut" onchange="calculateTotal()" /></div>
+          </div>
+          <div class="form-group"><label>Guests</label>
+            <select id="guestCount"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select>
+          </div>
+          <div class="booking-summary" id="bookingSummary" style="display:none">
+            <div class="summary-row"><span>Nights</span><span id="nightsCount">—</span></div>
+            <div class="summary-row"><span>Rate per night</span><span id="ratePerNight">—</span></div>
+            <div class="summary-row total"><span>Total</span><span id="totalAmount">—</span></div>
+          </div>
+          <button class="btn-submit" id="continueBtn" onclick="goToOptions()">Continue →</button>
+        </div>
+
+        <!-- Step 2: Choose payment method -->
+        <div class="booking-step" id="step2" style="display:none">
+          <h3>✅ Confirm & Choose Payment</h3>
+          <div class="booking-summary">
+            <div class="summary-row"><span>Property</span><span id="summaryProperty">—</span></div>
+            <div class="summary-row"><span>Check-in</span><span id="summaryCheckin">—</span></div>
+            <div class="summary-row"><span>Check-out</span><span id="summaryCheckout">—</span></div>
+            <div class="summary-row"><span>Duration</span><span id="summaryNights">—</span></div>
+            <div class="summary-row total"><span>Total</span><span id="summaryTotal">—</span></div>
+          </div>
+          <p style="margin:1rem 0 0.5rem;font-size:0.9rem;color:var(--text-secondary)">How would you like to pay?</p>
+          <button class="btn-mpesa" onclick="payWithMpesa()"><span>💳</span> Pay with M-Pesa</button>
+          <p style="margin:0.75rem 0 0.5rem;font-size:0.82rem;color:var(--text-muted);text-align:center">— or use a backup option —</p>
+          <button class="btn-whatsapp" onclick="bookViaWhatsApp()"><span>💬</span> Book via WhatsApp</button>
+          <button class="btn-airbnb" onclick="bookViaAirbnb()"><span>🏠</span> Book on Airbnb</button>
+          <button class="btn-back" onclick="goBack()">← Back</button>
+        </div>
+
+        <!-- Step 3: Mpesa payment -->
+        <div class="booking-step" id="step3" style="display:none">
+          <h3>📱 Pay with M-Pesa</h3>
+          <div class="mpesa-info">
+            <div class="mpesa-logo">M-PESA</div>
+            <p>Enter your phone number to receive an STK Push prompt.</p>
+          </div>
+          <div class="form-group"><label>M-Pesa Phone Number</label><input type="tel" id="mpesaPhone" placeholder="07XX XXX XXX" /></div>
+          <div class="booking-summary">
+            <div class="summary-row total"><span>Amount</span><span id="payAmount">—</span></div>
+          </div>
+          <button class="btn-submit" id="payNowBtn" onclick="submitMpesaPayment()" style="width:100%">Pay Now via M-Pesa</button>
+          <button class="btn-back" onclick="goBackToOptions()" style="width:100%;margin-top:0.5rem">← Back</button>
+        </div>
+
+        <!-- Step 4: Waiting for / result of M-Pesa payment -->
+        <div class="booking-step" id="step4" style="display:none">
+          <div class="payment-waiting" id="paymentWaiting">
+            <div class="spinner"></div>
+            <h3>Waiting for payment…</h3>
+            <p id="paymentWaitText">Check your phone and enter your M-Pesa PIN to complete the payment. This screen updates automatically.</p>
+          </div>
+          <div id="paymentResult" style="display:none"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- RATING MODAL -->
+  <div class="modal-overlay" id="ratingModal" onclick="if(event.target===this)closeRatingModal()">
+    <div class="rating-modal">
+      <button class="modal-close" onclick="closeRatingModal()">✕</button>
+      <h2 class="booking-title">Rate Your Stay</h2>
+      <p class="rating-subtitle">at <em id="ratingPropertyName"></em></p>
+      <div class="star-selector">
+        <span onclick="updateStarSelector(1)">★</span>
+        <span onclick="updateStarSelector(2)">★</span>
+        <span onclick="updateStarSelector(3)">★</span>
+        <span onclick="updateStarSelector(4)">★</span>
+        <span onclick="updateStarSelector(5)">★</span>
+      </div>
+      <p class="star-hint">Tap a star to rate</p>
+      <div class="form-group" style="margin-top:1rem;text-align:left">
+        <label>Comment (optional)</label>
+        <textarea id="ratingComment" rows="3" placeholder="Tell us about your stay..." style="width:100%"></textarea>
+      </div>
+      <button class="btn-submit" style="width:100%;margin-top:1rem" onclick="submitRating()">Submit Rating</button>
+    </div>
+  </div>
+
+  <!-- TOAST CONTAINER -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
