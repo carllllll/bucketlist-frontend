@@ -11,7 +11,7 @@ const properties = [
     id: 'cfa7c66c-5ffc-4836-a673-199d02937990',
     name: "Tatu City Airbnb",
     location: "Tatu City, Nairobi",
-    pricePerNight: 10,
+    pricePerNight: 7000,
     airbnbUrl: "https://www.airbnb.co.uk/rooms/1398676139265440613?unique_share_id=a24474a5-e536-4839-b037-66001bd5f2f9&viralityEntryPoint=1&s=76",
     whatsapp: "254716564174",
     description: "A stunning 3-bedroom apartment within the vibrant Tatu City development.",
