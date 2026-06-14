@@ -62,6 +62,13 @@ properties.forEach(p => {
   p.ratings = saved ? JSON.parse(saved) : [];
 });
 
+// Per-property SEO pages (for internal links + booking deep-links)
+const PROPERTY_SLUGS = {
+  'cfa7c66c-5ffc-4836-a673-199d02937990': 'tatu-city-nairobi.html',
+  '3592bce4-e2d3-49b8-bb1d-27042e1d8ff8': 'riverside-winchester-gardens.html',
+  'c724a8f4-d8a2-481c-a2ed-d17e85fead74': 'racecourse-gardens.html'
+};
+
 let currentGalleryProperty = null;
 let currentPhotoIndex = 0;
 let currentBookingProperty = null;
@@ -214,7 +221,7 @@ async function renderListings() {
       </div>
       <div class="card-body">
         <div class="card-location">📍 ${prop.location}</div>
-        <h3 class="card-title">${prop.name}</h3>
+        <h3 class="card-title">${PROPERTY_SLUGS[prop.id] ? `<a href="${PROPERTY_SLUGS[prop.id]}" style="color:inherit;text-decoration:none">${prop.name}</a>` : prop.name}</h3>
         <div class="card-star-row">
           ${renderStarsDisplay(average)}
           <span class="rating-count">${total > 0 ? average + ' · ' + total + ' review' + (total > 1 ? 's' : '') : 'No reviews yet'}</span>
@@ -1027,4 +1034,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   properties.forEach(p => localStorage.removeItem('ratings_' + p.id));
   await renderListings();
   updateAuthUI();
+
+  // Deep link from a per-property page: index.html?book=<property-id>
+  const bookId = new URLSearchParams(window.location.search).get('book');
+  if (bookId) {
+    const prop = properties.find(p => p.id === bookId);
+    if (prop) {
+      openBooking(prop.id, prop.name);
+      history.replaceState({}, '', window.location.pathname); // clean the URL
+    }
+  }
 });
