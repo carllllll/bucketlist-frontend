@@ -43,7 +43,7 @@ const properties = [
     id: 'c724a8f4-d8a2-481c-a2ed-d17e85fead74',
     name: "Racecourse Gardens",
     location: "Racecourse, Nairobi",
-    pricePerNight: 3500,
+    pricePerNight: 10,
     airbnbUrl: "https://www.airbnb.com",
     whatsapp: "254716564174",
     description: "A cosy 1-bedroom apartment in Racecourse Gardens with gym, pool and laundromat.",
